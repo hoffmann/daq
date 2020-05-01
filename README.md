@@ -1,2 +1,7 @@
-# daq
-Dataset Query 
+daq
+===============================
+
+author: Peter Hoffmann
+
+Overview
+--------
