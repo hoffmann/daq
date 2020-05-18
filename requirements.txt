@@ -1,2 +1,7 @@
 # Dev/Deployment
 pytest
+dask[distributed,dataframe]
+pyarrow
+simplekv
+storefact
+azure-storage-blob
