@@ -43,6 +43,6 @@ with {dataset.dataset_uuid} as (
         ) as [result]
 )
 
-select top 100 * from {ds.dataset_uuid};
+select top 100 * from {dataset.dataset_uuid};
     """
     return template.format(dataset=dataset, cols=cols, index_col=index_col)

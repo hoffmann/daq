@@ -11,8 +11,9 @@ daq is a tool to query hive partitioned datasets in the azure blob store/datalak
 Release
 -------
 
-    git tag -a 0.1 -m 0.1
+
+    git tag -a 0.4 -m 0.4
 
     pip install twine wheel
     python setup.py bdist_wheel
-    twine upload dist/daq-0.1-py2.py3-none-any.whl
+    twine upload dist/daq-0.4-py2.py3-none-any.whl

@@ -58,15 +58,15 @@ class Dataset:
         ) = parse_dataset(self.url)
         self.readonly_sas_token = readonly_sas_token
         self.writable_sas_token = writable_sas_token
-        self.account_key = self.account_keys[self.account_name]
 
     @property
     def store(self):
         if self.readonly_sas_token:
             readonly_sas_token = self.readonly_sas_token
         else:
+            account_key = self.account_keys[self.account_name]
             readonly_sas_token = get_sas_token(
-                self.account_name, self.account_key, self.container, readonly=True
+                self.account_name, account_key, self.container, readonly=True
             )
         store = get_store(
             "hazure",
@@ -83,8 +83,9 @@ class Dataset:
         if self.writable_sas_token:
             writable_sas_token = self.writable_sas_token
         else:
+            account_key = self.account_keys[self.account_name]
             writable_sas_token = get_sas_token(
-                self.account_name, self.account_key, self.container, readonly=False
+                self.account_name, account_key, self.container, readonly=False
             )
         store = get_store(
             "hazure",
