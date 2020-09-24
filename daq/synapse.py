@@ -6,7 +6,7 @@ def synapse_columns(table_meta, index_col):
         "int64": "bigint",
         "timestamp[ns]": "datetime",
         "date32[day]": "date",
-        "bool": "boolean",
+        "bool": "bit",
     }
 
     result = ""
@@ -19,7 +19,7 @@ def synapse_columns(table_meta, index_col):
     return result[:-2]  # remove last ,
 
 
-def table_defintion(dataset):
+def table_definition(dataset):
     """print an azure synapse table definition for a kartothek dataset"""
 
     index_col = list(dataset.dataset_metadata.index_columns)[

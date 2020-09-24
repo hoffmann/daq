@@ -1,5 +1,7 @@
+import pytest
 from daq.kartothek import Dataset
 from daq.stats import describe
+
 
 def test_kartothek_dataset(dataset, dataset_url, account_name, account_key, container, dataset_uuid):
     Dataset.account_keys = {account_name: account_key}
@@ -18,6 +20,11 @@ def test_kartothek_dataset(dataset, dataset_url, account_name, account_key, cont
     dm = ds.dataset_metadata
     assert dm.index_columns == set('B')
 
+def test_readonly(dataset, dataset_url, account_name, account_key):
+    Dataset.account_keys = {account_name: account_key}
+    ds = Dataset(dataset_url)
+    with pytest.raises(Exception):
+        s = ds.writable_store
 
 def test_stats(dataset, dataset_url, account_name, account_key):
     Dataset.account_keys = {account_name: account_key}

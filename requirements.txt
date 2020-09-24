@@ -4,4 +4,7 @@ dask[distributed,dataframe]
 pyarrow
 simplekv
 storefact
-azure-storage-blob
+azure-storage-blob==2.1.0
+pandas
+numpy
+kartothek
