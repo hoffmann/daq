@@ -7,38 +7,12 @@ from azure.storage.blob import BlockBlobService
 from azure.storage.blob import ContainerPermissions
 from kartothek.io.dask.dataframe import read_dataset_as_ddf
 from kartothek.io.dask.dataframe import update_dataset_from_ddf
+
+from daq.store import get_sas_token, parse_dataset
+
 from storefact import get_store
 
 
-def get_sas_token(account_name, account_key, container, readonly=True):
-    service = BlockBlobService(account_name=account_name, account_key=account_key)
-    # res = service.create_container(container)
-    if readonly:
-        permission = ContainerPermissions(
-            read=True, list=True, write=False, delete=False
-        )
-    else:
-        permission = ContainerPermissions(read=True, list=True, write=True, delete=True)
-    expiry = (datetime.utcnow() + timedelta(days=7)).replace(
-        hour=0, minute=0, second=0, microsecond=0
-    )
-    start = (datetime.utcnow() - timedelta(days=7)).replace(
-        hour=0, minute=0, second=0, microsecond=0
-    )
-    token = service.generate_container_shared_access_signature(
-        container, permission=permission, expiry=expiry, start=start
-    )
-    return token
-
-
-def parse_dataset(url):
-    """
-    https://<accountname>.dfs.core.windows.net/<container>/<file.path>/
-    """
-    r = urllib.parse.urlparse(url)
-    _, container, dataset_uuid, table = r.path.split("/", 3)
-    account_name = r.hostname.split(".")[0]
-    return account_name, container, dataset_uuid, table
 
 
 class Dataset:
